@@ -8451,7 +8451,10 @@
     ],
     "dev": true,
     "dev-package-names": [
+        "nikic/php-parser",
         "symfony/debug-bundle",
+        "symfony/maker-bundle",
+        "symfony/process",
         "symfony/web-profiler-bundle"
     ]
 }

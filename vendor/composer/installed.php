@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '861ed9931a5e38bb5848115aae9bce49900e6b7c',
+        'reference' => '02013ffd6856c3765d5815a1bac270df76c3b7b7',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '861ed9931a5e38bb5848115aae9bce49900e6b7c',
+            'reference' => '02013ffd6856c3765d5815a1bac270df76c3b7b7',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -25,15 +25,6 @@
             'reference' => '055fb38027e3125a2d5df58f77134d81f42075ca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../api-platform/core',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'composer/semver' => array(
-            'pretty_version' => '3.4.0',
-            'version' => '3.4.0.0',
-            'reference' => '35e8d0af4486141bc745f23a29cc2091eb624a32',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/./semver',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -217,18 +208,6 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'php-http/async-client-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '*',
-            ),
-        ),
-        'php-http/client-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '*',
-            ),
-        ),
         'phpdocumentor/reflection-common' => array(
             'pretty_version' => '2.2.0',
             'version' => '2.2.0.0',
@@ -325,12 +304,6 @@
                 0 => '1.0',
             ),
         ),
-        'psr/http-client-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '1.0',
-            ),
-        ),
         'psr/link' => array(
             'pretty_version' => '2.0.1',
             'version' => '2.0.1.0',
@@ -383,15 +356,6 @@
             'reference' => '14b1c0fddb64af6ea626af51bb3c47af9fa19cb7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/asset',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'symfony/asset-mapper' => array(
-            'pretty_version' => 'v6.4.5',
-            'version' => '6.4.5.0',
-            'reference' => 'f9f7406a0ab59769956bdd09405e505b8e7ab0a5',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/asset-mapper',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -577,30 +541,6 @@
             'install_path' => __DIR__ . '/../symfony/framework-bundle',
             'aliases' => array(),
             'dev_requirement' => false,
-        ),
-        'symfony/http-client' => array(
-            'pretty_version' => 'v6.4.5',
-            'version' => '6.4.5.0',
-            'reference' => 'f3c86a60a3615f466333a11fd42010d4382a82c7',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/http-client',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'symfony/http-client-contracts' => array(
-            'pretty_version' => 'v3.4.0',
-            'version' => '3.4.0.0',
-            'reference' => '1ee70e699b41909c209a0c930f11034b93578654',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/http-client-contracts',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'symfony/http-client-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '3.0',
-            ),
         ),
         'symfony/http-foundation' => array(
             'pretty_version' => 'v6.4.4',

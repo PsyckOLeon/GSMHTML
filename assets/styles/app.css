@@ -1,3 +1,9 @@
 body {
     background-color: lightgray;
 }
+
+.btn-bd-primary {
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+}

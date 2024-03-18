@@ -14,17 +14,8 @@ require('bootstrap');
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('[data-toggle="popover"]').popover();
-});
-
-// this waits for Turbo Drive to load
-document.addEventListener('turbo:load', function (e) {
-    // this enables bootstrap tooltips globally
-    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new Tooltip(tooltipTriggerEl)
-    });
 });
 
 // Theme

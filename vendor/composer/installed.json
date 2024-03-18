@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "v3.2.16",
-            "version_normalized": "3.2.16.0",
+            "version": "v3.2.17",
+            "version_normalized": "3.2.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "055fb38027e3125a2d5df58f77134d81f42075ca"
+                "reference": "1cc114b93e95bdce5b48be46f84c1e11446a8d2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/055fb38027e3125a2d5df58f77134d81f42075ca",
-                "reference": "055fb38027e3125a2d5df58f77134d81f42075ca",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/1cc114b93e95bdce5b48be46f84c1e11446a8d2f",
+                "reference": "1cc114b93e95bdce5b48be46f84c1e11446a8d2f",
                 "shasum": ""
             },
             "require": {
@@ -123,7 +123,7 @@
                 "symfony/web-profiler-bundle": "To use the data collector.",
                 "webonyx/graphql-php": "To support GraphQL."
             },
-            "time": "2024-03-05T10:51:18+00:00",
+            "time": "2024-03-15T15:26:20+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -165,7 +165,7 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v3.2.16"
+                "source": "https://github.com/api-platform/core/tree/v3.2.17"
             },
             "install-path": "../api-platform/core"
         },

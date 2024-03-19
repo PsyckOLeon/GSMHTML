@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head data-bs-theme="dark">
+<head data-bs-theme="auto">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -17,14 +17,14 @@
     {% endblock %}
 </head>
 <body>
-<header data-bs-theme="dark">
+<header data-bs-theme="auto">
     {{ include('partials/header.html.twig') }}
 </header>
-<main>
+<main data-bs-theme="auto">
     {% block body %}{% endblock %}
 </main>
 
-<div class="container" style="position:absolute; bottom: 0; left: 0; right: 0; text-align: center">
+<div class="container" style="position:absolute; bottom: 0; left: 0; right: 0; text-align: center" data-bs-theme="auto">
     {{ include('partials/footer.html.twig') }}
 </div>
 </body>

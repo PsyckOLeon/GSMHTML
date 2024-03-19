@@ -100,7 +100,7 @@ return array(
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/event-manager/src'),
     'Doctrine\\Bundle\\MigrationsBundle\\' => array($vendorDir . '/doctrine/doctrine-migrations-bundle'),
     'Doctrine\\Bundle\\FixturesBundle\\' => array($vendorDir . '/doctrine/doctrine-fixtures-bundle'),
-    'Doctrine\\Bundle\\DoctrineBundle\\' => array($vendorDir . '/doctrine/doctrine-bundle'),
+    'Doctrine\\Bundle\\DoctrineBundle\\' => array($vendorDir . '/doctrine/doctrine-bundle/src'),
     'App\\Tests\\' => array($baseDir . '/tests'),
     'App\\' => array($baseDir . '/src'),
     'ApiPlatform\\' => array($vendorDir . '/api-platform/core/src'),

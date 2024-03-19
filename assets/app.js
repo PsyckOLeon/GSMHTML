@@ -37,10 +37,22 @@ $(document).ready(function () {
 
     const setTheme = theme => {
         if (theme === 'auto') {
-            document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+            const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-bs-theme', preferredTheme);
+            updateSymbolClasses(preferredTheme); // Mettre à jour les classes des symboles
         } else {
-            document.documentElement.setAttribute('data-bs-theme', theme)
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            updateSymbolClasses(theme); // Mettre à jour les classes des symboles
         }
+    }
+
+    const updateSymbolClasses = theme => {
+        const symbols = document.querySelectorAll('.bi use');
+        symbols.forEach(useElement => {
+            const symbol = useElement.parentNode;
+            symbol.classList.remove('theme-dark', 'theme-light');
+            symbol.classList.add(`theme-${theme}`);
+        });
     }
 
     setTheme(getPreferredTheme())
@@ -76,12 +88,13 @@ $(document).ready(function () {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         const storedTheme = getStoredTheme()
         if (storedTheme !== 'light' && storedTheme !== 'dark') {
-            setTheme(getPreferredTheme())
+            const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            setTheme(preferredTheme);
         }
-    })
+    });
 
     window.addEventListener('DOMContentLoaded', () => {
-        showActiveTheme(getPreferredTheme())
+        showActiveTheme(getPreferredTheme());
 
         document.querySelectorAll('[data-bs-theme-value]')
             .forEach(toggle => {
@@ -91,8 +104,11 @@ $(document).ready(function () {
                     setTheme(theme)
                     showActiveTheme(theme, true)
                 })
-            })
-    })
+            });
+        // Mettre à jour les classes des symboles au chargement de la page
+        const currentTheme = getPreferredTheme();
+        updateSymbolClasses(currentTheme);
+    });
 })()
 
 // Fin Theme

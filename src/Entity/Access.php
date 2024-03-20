@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\AccesRepository;
+use App\Repository\AccessRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AccesRepository::class)]
+#[ORM\Entity(repositoryClass: AccessRepository::class)]
 #[ApiResource]
-class Acces
+class Access
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

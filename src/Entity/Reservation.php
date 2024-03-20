@@ -15,7 +15,7 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $userid = null;
+    private ?int $access = null;
 
     #[ORM\Column(length: 255)]
     private ?string $location = null;
@@ -40,14 +40,14 @@ class Reservation
         return $this->id;
     }
 
-    public function getUserid(): ?int
+    public function getAccess(): ?int
     {
-        return $this->userid;
+        return $this->access;
     }
 
-    public function setUserid(string $userid): static
+    public function setAccess(string $access): static
     {
-        $this->userid = $userid;
+        $this->access = $access;
 
         return $this;
     }

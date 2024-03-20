@@ -2,23 +2,23 @@
 
 namespace App\Repository;
 
-use App\Entity\Acces;
+use App\Entity\Access;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Acces>
+ * @extends ServiceEntityRepository<Access>
  *
- * @method Acces|null find($id, $lockMode = null, $lockVersion = null)
- * @method Acces|null findOneBy(array $criteria, array $orderBy = null)
- * @method Acces[]    findAll()
- * @method Acces[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Access|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Access|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Access[]    findAll()
+ * @method Access[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AccesRepository extends ServiceEntityRepository
+class AccessRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Acces::class);
+        parent::__construct($registry, Access::class);
     }
 
     //    /**

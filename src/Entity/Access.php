@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AccessRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccessRepository::class)]
@@ -38,6 +40,14 @@ class Access
 
     #[ORM\Column]
     private ?int $port5 = null;
+
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'accessid')]
+    private Collection $accessid;
+
+    public function __construct()
+    {
+        $this->accessid = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +146,36 @@ class Access
     public function setPort5(int $port5): static
     {
         $this->port5 = $port5;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getAccessid(): Collection
+    {
+        return $this->accessid;
+    }
+
+    public function addAccessid(Reservation $accessid): static
+    {
+        if (!$this->accessid->contains($accessid)) {
+            $this->accessid->add($accessid);
+            $accessid->setAccessid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccessid(Reservation $accessid): static
+    {
+        if ($this->accessid->removeElement($accessid)) {
+            // set the owning side to null (unless already changed)
+            if ($accessid->getAccessid() === $this) {
+                $accessid->setAccessid(null);
+            }
+        }
 
         return $this;
     }

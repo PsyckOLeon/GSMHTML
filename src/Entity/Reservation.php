@@ -14,9 +14,6 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $access = null;
-
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
@@ -35,23 +32,18 @@ class Reservation
     #[ORM\Column]
     private ?int $cycle = null;
 
+    #[ORM\ManyToOne(inversedBy: 'userid')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userid = null;
+
+    #[ORM\ManyToOne(inversedBy: 'accessid')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Access $accessid = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getAccess(): ?int
-    {
-        return $this->access;
-    }
-
-    public function setAccess(string $access): static
-    {
-        $this->access = $access;
-
-        return $this;
-    }
-
     public function getLocation(): ?string
     {
         return $this->location;
@@ -120,6 +112,30 @@ class Reservation
     public function setCycle(int $cycle): static
     {
         $this->cycle = $cycle;
+
+        return $this;
+    }
+
+    public function getUserid(): ?User
+    {
+        return $this->userid;
+    }
+
+    public function setUserid(?User $userid): static
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    public function getAccessid(): ?Access
+    {
+        return $this->accessid;
+    }
+
+    public function setAccessid(?Access $accessid): static
+    {
+        $this->accessid = $accessid;
 
         return $this;
     }

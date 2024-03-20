@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -24,6 +26,14 @@ class User
 
     #[ORM\Column]
     private ?int $permission = null;
+
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'userid')]
+    private Collection $userid;
+
+    public function __construct()
+    {
+        $this->userid = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,36 @@ class User
     public function setPermission(int $permission): static
     {
         $this->permission = $permission;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getUserid(): Collection
+    {
+        return $this->userid;
+    }
+
+    public function addUserid(Reservation $userid): static
+    {
+        if (!$this->userid->contains($userid)) {
+            $this->userid->add($userid);
+            $userid->setUserid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserid(Reservation $userid): static
+    {
+        if ($this->userid->removeElement($userid)) {
+            // set the owning side to null (unless already changed)
+            if ($userid->getUserid() === $this) {
+                $userid->setUserid(null);
+            }
+        }
 
         return $this;
     }

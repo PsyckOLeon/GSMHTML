@@ -20,4 +20,25 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+    #[Route('/user/edit/{id}', name: 'user_edit')]
+    public function update(EntityManagerInterface $entityManager, int $id): Response
+    {
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                "Pas d'utilisateur avec cette ".$id
+            );
+        }
+
+        $user->setName('Nouveaux prénom name!');
+        $user->setLastname('Nouveaux nom lastname!');
+        $user->setPhoneNumber('Nouveaux téléphone phone_number!');
+        $user->setPermission('Nouvelles permissions permission!');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_user', [
+            'id' => $user->getId()
+        ]);
+    }
 }

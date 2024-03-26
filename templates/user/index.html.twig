@@ -41,6 +41,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+                                        <a href="/user/edit/{{ users.id }}"
+                                           class="btn btn-warning btn-sm">Modifier</a>
                                         <form method="post"
                                               action="{{ path('user_delete', {id: users.id}) }}"
                                               style="display: inline-block"

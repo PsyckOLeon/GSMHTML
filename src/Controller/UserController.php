@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserControllerType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -21,7 +23,7 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/user/edit/{id}', name: 'user_edit')]
-    public function update(EntityManagerInterface $entityManager, int $id): Response
+    public function update(EntityManagerInterface $entityManager, Request $request,int $id): Response
     {
         $user = $entityManager->getRepository(User::class)->find($id);
 
@@ -30,16 +32,19 @@ class UserController extends AbstractController
                 "Pas d'utilisateur avec cette ".$id
             );
         }
+        $form = $this->createForm(UserControllerType::class, $user);
 
-        $user->setFirstname('Nouveaux prénom firstname!');
-        $user->setLastname('Nouveaux nom lastname!');
-        $user->setPhoneNumber('Nouveaux téléphone phone_number!');
-        $user->setPermission('Nouvelles permissions permission!');
-        $entityManager->flush();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            $this->addFlash('success', "L'Utilisateur <strong>{$user->getFirstname()}</strong> a bien été modifié");
+            return $this->redirectToRoute('app_user');
+        }
 
-        return $this->redirectToRoute('app_user', [
-            'id' => $user->getId()
-        ]);
+        return $this->render('user/edit.html.twig', [
+            'current_menu' => 'user',
+            'form' => $form->createView()]);
     }
 
     #[Route('/user/delete/{id}', name: 'user_delete')]

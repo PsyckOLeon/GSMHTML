@@ -31,7 +31,7 @@ class UserController extends AbstractController
             );
         }
 
-        $user->setName('Nouveaux prénom name!');
+        $user->setFirstname('Nouveaux prénom firstname!');
         $user->setLastname('Nouveaux nom lastname!');
         $user->setPhoneNumber('Nouveaux téléphone phone_number!');
         $user->setPermission('Nouvelles permissions permission!');

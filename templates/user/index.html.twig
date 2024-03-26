@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container">
+        <a href="{{ path('user_add') }}">Ajouter un utilisateur</a>
         <table class="table table-striped table-bordered text-center">
             <thead class="thead-light">
             <tr>
@@ -33,7 +34,7 @@
                             </svg>
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade modal-lg " id="ModalModif" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal fade modal-sm " id="ModalModif" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -52,7 +53,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Sauvegarder</button>
+{#                                        <button type="button" class="btn btn-primary">Sauvegarder</button>#}
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                     </div>
                                 </div>

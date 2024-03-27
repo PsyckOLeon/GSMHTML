@@ -2,9 +2,30 @@
 {% block title %}Modifier Utilisateur{% endblock %}
 {% block body %}
     <div class="container">
+        <h1>Modification d'un utilisateur</h1>
+        <br>
         {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-success">Sauvegarder</button>
+        <div class="row g-3 needs-validation">
+            <div class="col-md-6">
+                <label for="validationServer01" class="form-label">Prénom</label>
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div class="col-md-6">
+                <label for="validationServer02" class="form-label">Nom</label>
+                {{ form_widget(form.lastname) }}
+            </div>
+            <div class="col-md-9">
+                <label for="validationServer03" class="form-label">Numéro de téléphone</label>
+                {{ form_widget(form.phone_number) }}
+            </div>
+            <div class="col-md-3">
+                <label for="validationServer04" class="form-label">Permission</label>
+                {{ form_widget(form.permission) }}
+            </div>
+            <div class="col-12">
+                <button class="btn btn-success" type="submit">Sauvegarder</button>
+            </div>
+        </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}

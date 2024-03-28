@@ -65,7 +65,6 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
             $this->addFlash('success', "L'Utilisateur <strong>{$user->getFirstname()}</strong> a bien été modifié");
             return $this->redirectToRoute('app_user');

@@ -39,11 +39,17 @@ class AccessController extends AbstractController
         // Fin Ajout
         // Modification
         $access = $entityManager->getRepository(Access::class)->findAll();
+        $formEdit = [];
+        foreach ($access as $accesss) {
+            $formEdit[$accesss->getId()] = $this->createForm(AccessControllerType::class, $accesss)->createView();
+        }
+
         return $this->render('access/index.html.twig', [
             'controller_name' => 'AccessController',
             'current_menu' => 'access',
             'access' => $access,
             'form' => $form->createView(),
+            'formedit' => $formEdit,
         ]);
     }
     #[Route('/access/edit/{id}', name: 'access_edit')]

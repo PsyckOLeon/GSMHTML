@@ -86,71 +86,68 @@
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#ModalModif">
+                                    data-bs-target="#ModalModif_{{ accesss.id }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-tools" viewBox="0 0 16 16">
                                     <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
                                 </svg>
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade modal-lg " id="ModalModif" tabindex="-1" aria-labelledby="ModalLabel"
-                                 aria-hidden="true">
+                            <div class="modal fade modal-lg " id="ModalModif_{{ accesss.id }}" tabindex="-1"
+                                 aria-labelledby="ModalLabelModif_{{ accesss.id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="ModalLabel">{{ accesss.name }}</h1>
+                                            <h1 class="modal-title fs-5" id="ModalLabelModif">{{ accesss.name }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="container">
-                                        <form method="post"
-                                              action="{{ path('access_edit', {id: accesss.id}) }}">
-                                            <div class="row g-3 needs-validation">
-                                                <div class="col-md-6">
-                                                    <label for="validationServer01" class="form-label">Nom</label>
-                                                    <input name="name" type="text" id="validationServer01"
-                                                           value="{{ accesss.name }}" class="form-control">
+                                            <div class="modal-body">
+                                                {{ form_start(formedit[accesss.id],{'action': path('access_edit', {id: accesss.id}) })}}
+                                                <div class="row g-3 needs-validation">
+                                                    <div class="col-md-6">
+                                                        <label for="validationServer01" class="form-label">Nom</label>
+                                                        {{ form_widget(formedit[accesss.id].name) }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="validationServer02" class="form-label">Téléphone</label>
+                                                        {{ form_widget(formedit[accesss.id].phone) }}
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer03" class="form-label">Port 1</label>
+                                                        {{ form_widget(formedit[accesss.id].port1) }}
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="validationServer03" class="form-label">Port 2</label>
+                                                        {{ form_widget(formedit[accesss.id].port2) }}
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="validationServer03" class="form-label">Port 3</label>
+                                                        {{ form_widget(formedit[accesss.id].port3) }}
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="validationServer03" class="form-label">Port 4</label>
+                                                        {{ form_widget(formedit[accesss.id].port4) }}
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer03" class="form-label">Port 5</label>
+                                                        {{ form_widget(formedit[accesss.id].port5) }}
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label for="validationServer02" class="form-label">Téléphone</label>
-                                                    <input name="phone" type="text" id="validationServer02"
-                                                           value="{{ accesss.phone }}" class="form-control">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label for="validationServer03" class="form-label">Port 1</label>
-                                                    <input name="port1" type="text" id="validationServer03"
-                                                           value="{{ accesss.port1 }}" class="form-control">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label for="validationServer03" class="form-label">Port 2</label>
-                                                    <input name="port2" type="text" id="validationServer03"
-                                                           value="{{ accesss.port2 }}" class="form-control">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label for="validationServer03" class="form-label">Port 3</label>
-                                                    <input name="port3" type="text" id="validationServer03"
-                                                           value="{{ accesss.port3 }}" class="form-control">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label for="validationServer03" class="form-label">Port 4</label>
-                                                    <input name="port4" type="text" id="validationServer03"
-                                                           value="{{ accesss.port4 }}" class="form-control">
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label for="validationServer03" class="form-label">Port 5</label>
-                                                    <input name="port5" type="text" id="validationServer03"
-                                                           value="{{ accesss.port5 }}" class="form-control">
-                                                </div>
+                                                <br>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder
-                                            </button>
-                                        </form>
                                         </div>
                                         <div class="modal-footer">
                                             <table class="table text-center">
                                                 <thead class="thead-light">
                                                 <tr>
-                                                    <th class="col-4">
+                                                    <th>
+                                                        <button type="submit" class="btn btn-primary">Sauvegarder
+                                                        </button>
+                                                    </th>
+                                                    {{ form_end(formedit[accesss.id]) }}
+                                                    <th>
                                                         <form method="post"
                                                               action="{{ path('access_delete', {id: accesss.id}) }}"
                                                               style="display: inline-block"
@@ -159,10 +156,6 @@
                                                             <button type="submit" class="btn btn-danger">Supprimer
                                                             </button>
                                                         </form>
-                                                    </th>
-                                                    <th>
-                                                        <button type="submit" class="btn btn-primary">Sauvegarder
-                                                        </button>
                                                     </th>
                                                     <th>
                                                         <button type="button" class="btn btn-secondary"

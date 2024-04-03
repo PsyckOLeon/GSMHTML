@@ -4,16 +4,38 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\ApiFilter;
+use App\Controller\RequestController;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ReservationRepository::class)]
-#[ApiResource(
+#[ApiResource
+(
     operations: [
-        new Get(),
+        'get' => [
+            'method' => 'GET',
+            'path' => '/request/{telephone}',
+            'controller' => RequestController::class,
+            'openapi_context' => [
+                'summary' => 'Get user reservations by telephone',
+                'parameters' => [
+                    [
+                        'name' => 'telephone',
+                        'in' => 'path',
+                        'required' => true,
+                        'description' => 'User telephone number',
+                        'schema' => [
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ]
-)]
+)
+]
+#[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
     #[ORM\Id]

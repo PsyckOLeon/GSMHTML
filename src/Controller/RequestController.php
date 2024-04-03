@@ -18,64 +18,52 @@ use App\Entity\Reservation;
 #[AsController]
 class RequestController extends AbstractController
 {
-    #[Route(path: '/api/request/{telephone}', name: 'app_request', methods: ['GET'], defaults: [
-        '_api_resource_class' => Request::class,
-        '_api_operation_name' => '_api_/request/{telephone}',
-    ],)]
-    #[ApiResource(operations: [
-        new Get(
-            uriTemplate: '/request/{telephone}',
-            requirements: ['telephone' => '\d+'],
-            options: ['my_option' => 'my_option_value'],
-            name: 'request'
-        )],)]
+    #[Route(path: '/api/request/{telephone}', name: 'app_request', methods: ['GET'])]
     public function getUserByTelephone(string $telephone, EntityManagerInterface $entityManager): JsonResponse
     {
-        $access = $entityManager->getRepository(Access::class)->findAll();
-        $reservation = $entityManager->getRepository(Reservation::class)->findAll();
-        $user = $entityManager->getRepository(User::class)->findAll();
-        $lastname = 0;
-        $firstname = 0;
-        $date_debut = 0;
-        $date_fin = 0;
-        $heure = 0;
-        $duree = 0;
-        $cycle = 0;
-        $designation = 0;
-        foreach ($user as $users) {
-            if ($users->getPhoneNumber() == $telephone) {
-                $firstname = $users->getFirstname();
-                $lastname = $users->getLastname();
-                $userid = $users->getUserid();
-                foreach ($reservation as $reservations) {
-                    if ($userid == $reservations->getUserid()) {
-                        $date_debut = $reservations->getStartDate();
-                        $date_fin = $reservations->getEndDate();
-                        $heure = $reservations->getStartTime();
-                        $duree = ($reservations->getEndTime()) - $heure;
-                        $cycle = $reservations->getCycle();
-                        foreach ($access as $accesss) {
-                            if ($reservations->getAccessid() == $accesss->getAccessid()) {
-                                $designation = $accesss->getName();
-                            }
-                        }
-                    }
-                }
-            }
+        $userRepository = $entityManager->getRepository(User::class);
+        $reservationRepository = $entityManager->getRepository(Reservation::class);
+        $accessRepository = $entityManager->getRepository(Access::class);
+
+        $user = $userRepository->findOneBy(['phone_number' => $telephone]);
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found for telephone number: ' . $telephone], JsonResponse::HTTP_NOT_FOUND);
         }
-        $data = [
+
+        $reservations = $reservationRepository->findBy(['userid' => $user->getId()]);
+
+        if (empty($reservations)) {
+            return new JsonResponse(['error' => 'No reservations found for user with telephone number: ' . $telephone], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        $reservationData = [];
+        foreach ($reservations as $reservation) {
+            $access = $accessRepository->find($reservation->getAccessId());
+            if ($access) {
+                $designation = $access->getName();
+            } else {
+                // Gérer le cas où aucun enregistrement n'est trouvé
+                $designation = 'Unknown'; // Par exemple
+            }
+            $reservationData[] = [
+                'startDate' => $reservation->getStartDate(),
+                'endDate' => $reservation->getEndDate(),
+                'startTime' => $reservation->getStartTime(),
+                'endTime' => $reservation->getEndTime(),
+                'cycle' => $reservation->getCycle(),
+                'designation' => $designation,
+            ];
+        }
+
+        $userData = [
             'tel' => $telephone,
-            'nom' => $lastname,
-            'prenom' => $firstname,
-            'date_debut' => $date_debut,
-            'date_fin' => $date_fin,
-            'heure' => $heure,
-            'duree' => $duree,
-            'cycle' => $cycle,
-            'designation' => $designation,
+            'nom' => $user->getLastname(),
+            'prenom' => $user->getFirstname(),
+            'reservations' => $reservationData,
         ];
 
-        return new JsonResponse($data);
+        return new JsonResponse($userData);
     }
 }
 

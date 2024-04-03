@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
-    public function index(EntityManagerInterface $entityManager,Request $request): Response
+    public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
 
         $addreservation = new Reservation();
@@ -27,9 +27,9 @@ class ReservationController extends AbstractController
             $addreservation = $form->getData();
             $entityManager->persist($addreservation);
             $entityManager->flush();
-            $this->addFlash('success', "La réservation <strong>{$addreservation->getname()}</strong> a bien été enregistré");
+            $this->addFlash('success', "La réservation <strong>{$addreservation->getLocation()}</strong> a bien été enregistré");
 
-            return $this->redirectToRoute('app_access');
+            return $this->redirectToRoute('app_reservation');
         }
 
         $reservation = $entityManager->getRepository(Reservation::class)->findAll();
@@ -46,14 +46,15 @@ class ReservationController extends AbstractController
             'formedit' => $formEdit,
         ]);
     }
+
     #[Route('/reservation/edit/{id}', name: 'reservation_edit')]
-    public function update(EntityManagerInterface $entityManager, Request $request,int $id): Response
+    public function update(EntityManagerInterface $entityManager, Request $request, int $id): Response
     {
         $reservation = $entityManager->getRepository(Reservation::class)->find($id);
 
         if (!$reservation) {
             throw $this->createNotFoundException(
-                "Pas de reservation avec cette ".$id
+                "Pas de reservation avec cette " . $id
             );
         }
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -61,13 +62,14 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', "La réservation <strong>{$reservation->getName()}</strong> a bien été modifié");
+            $this->addFlash('success', "La réservation <strong>{$reservation->getLocation()}</strong> a bien été modifié");
             return $this->redirectToRoute('app_reservation');
         }
 
         return $this->redirectToRoute('app_reservation', [
         ]);
     }
+
     #[Route('/reservation/delete/{id}', name: 'reservation_delete')]
     public function delete(EntityManagerInterface $entityManager, int $id): RedirectResponse
     {
@@ -75,13 +77,13 @@ class ReservationController extends AbstractController
 
         if (!$reservation) {
             throw $this->createNotFoundException(
-                "Pas de réservation avec cette ".$id
+                "Pas de réservation avec cette " . $id
             );
         }
 
         $entityManager->remove($reservation);
         $entityManager->flush();
-        $this->addFlash('success', "La réservation <strong>{$reservation->getName()}</strong> a bien été supprimé");
+        $this->addFlash('success', "La réservation <strong>{$reservation->getLocation()}</strong> a bien été supprimé");
 
         return $this->redirectToRoute('app_reservation', [
         ]);

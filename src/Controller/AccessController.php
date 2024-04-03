@@ -46,14 +46,15 @@ class AccessController extends AbstractController
             'formedit' => $formEdit,
         ]);
     }
+
     #[Route('/access/edit/{id}', name: 'access_edit')]
-    public function update(EntityManagerInterface $entityManager, Request $request,int $id): Response
+    public function update(EntityManagerInterface $entityManager, Request $request, int $id): Response
     {
         $access = $entityManager->getRepository(Access::class)->find($id);
 
         if (!$access) {
             throw $this->createNotFoundException(
-                "Pas d'utilisateur avec cette ".$id
+                "Pas d'access avec cette " . $id
             );
         }
         $form = $this->createForm(AccessType::class, $access);
@@ -68,6 +69,7 @@ class AccessController extends AbstractController
         return $this->redirectToRoute('app_access', [
         ]);
     }
+
     #[Route('/access/delete/{id}', name: 'access_delete')]
     public function delete(EntityManagerInterface $entityManager, int $id): RedirectResponse
     {
@@ -75,7 +77,7 @@ class AccessController extends AbstractController
 
         if (!$access) {
             throw $this->createNotFoundException(
-                "Pas d'utilisateur avec cette ".$id
+                "Pas d'access avec cette " . $id
             );
         }
 

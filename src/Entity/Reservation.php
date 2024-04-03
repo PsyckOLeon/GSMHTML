@@ -83,6 +83,7 @@ class Reservation
     {
         return $this->id;
     }
+
     public function getLocation(): ?string
     {
         return $this->location;

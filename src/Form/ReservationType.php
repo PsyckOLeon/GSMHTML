@@ -32,8 +32,7 @@ class ReservationType extends AbstractType
             ->add('accessid', EntityType::class, [
                 'class' => Access::class,
                 'choice_label' => 'id',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAjout">
-            Ajout d'un access
+            Ajout d'une réservation
         </button>
         <div class="modal fade modal-lg " id="ModalAjout" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -18,36 +18,36 @@
                     <div class="container">
                         {{ form_start(form) }}
                         <div class="row g-3 needs-validation">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <label for="validationServer01" class="form-label">Lieux</label>
                                 {{ form_widget(form.location) }}
                             </div>
-                            <div class="col-md-6">
-                                <label for="validationServer02" class="form-label">Date de début</label>
+                            <div class="col-md-3">
+                                <label for="validationServer02" class="form-label">Date début</label>
                                 {{ form_widget(form.start_date) }}
                             </div>
                             <div class="col-md-3">
-                                <label for="validationServer03" class="form-label">date de fin</label>
-                                {{ form_widget(form.end_date) }}
-                            </div>
-                            <div class="col-md-2">
-                                <label for="validationServer03" class="form-label">Heure démmarage</label>
+                                <label for="validationServer03" class="form-label">Heure début</label>
                                 {{ form_widget(form.start_time) }}
                             </div>
-                            <div class="col-md-2">
-                                <label for="validationServer03" class="form-label">Heure Fin</label>
-                                {{ form_widget(form.end_time) }}
+                            <div class="col-md-3">
+                                <label for="validationServer03" class="form-label">User ID</label>
+                                {{ form_widget(form.userid) }}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <label for="validationServer03" class="form-label">Cycle</label>
                                 {{ form_widget(form.cycle) }}
                             </div>
-                            <div class="col-md-2">
-                                <label for="validationServer03" class="form-label">Cycle</label>
-                                {{ form_widget(form.userid) }}
+                            <div class="col-md-3">
+                                <label for="validationServer03" class="form-label">Date fin</label>
+                                {{ form_widget(form.end_date) }}
                             </div>
-                            <div class="col-md-2">
-                                <label for="validationServer03" class="form-label">Cycle</label>
+                            <div class="col-md-3">
+                                <label for="validationServer03" class="form-label">Heure Fin</label>
+                                {{ form_widget(form.end_time) }}
+                            </div>
+                            <div class="col-md-3">
+                                <label for="validationServer03" class="form-label">Access ID</label>
                                 {{ form_widget(form.accessid) }}
                             </div>
                         </div>
@@ -82,13 +82,13 @@
                     <tr>
                         <th scope="row">{{ reservations.id }}</th>
                         <td>{{ reservations.location }}</td>
-                        <td>{{ reservations.start_date }}</td>
-                        <td>{{ reservations.end_date }}</td>
-                        <td>{{ reservations.start_time }}</td>
-                        <td>{{ reservations.end_time }}</td>
+                        <td>{{ reservations.startdate|date('Y-m-d') }}</td>
+                        <td>{{ reservations.enddate|date('Y-m-d') }}</td>
+                        <td>{{ reservations.starttime }}</td>
+                        <td>{{ reservations.endtime }}</td>
                         <td>{{ reservations.cycle }}</td>
-                        <td>{{ reservations.userid }}</td>
-                        <td>{{ reservations.accessid }}</td>
+                        <td>{{ reservations.userid.id }}</td>
+                        <td>{{ reservations.accessid.id }}</td>
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -104,44 +104,51 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="ModalLabelModif">{{ reservations.location }}</h1>
+                                            <h1 class="modal-title fs-5"
+                                                id="ModalLabelModif">{{ reservations.location }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="container">
                                             <div class="modal-body">
-                                                {{ form_start(formedit[reservations.id],{'action': path('reservation_edit', {id: reservations.id}) })}}
+                                                {{ form_start(formedit[reservations.id],{'action': path('reservation_edit', {id: reservations.id}) }) }}
                                                 <div class="row g-3 needs-validation">
-                                                    <div class="col-md-6">
-                                                        <label for="validationServer01" class="form-label">Nom</label>
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer01" class="form-label">Lieux</label>
                                                         {{ form_widget(formedit[reservations.id].location) }}
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label for="validationServer02" class="form-label">Téléphone</label>
-                                                        {{ form_widget(formedit[reservations.id].startdate) }}
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer02" class="form-label">Date
+                                                            début</label>
+                                                        {{ form_widget(formedit[reservations.id].start_date) }}
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <label for="validationServer03" class="form-label">Port 1</label>
-                                                        {{ form_widget(formedit[reservations.id].enddate) }}
+                                                        <label for="validationServer03" class="form-label">Heure
+                                                            Début</label>
+                                                        {{ form_widget(formedit[reservations.id].start_time) }}
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label for="validationServer03" class="form-label">Port 2</label>
-                                                        {{ form_widget(formedit[reservations.id].starttime) }}
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer03" class="form-label">User
+                                                            ID</label>
+                                                        {{ form_widget(formedit[reservations.id].userid) }}
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label for="validationServer03" class="form-label">Port 3</label>
-                                                        {{ form_widget(formedit[reservations.id].endtime) }}
-                                                    </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <label for="validationServer03" class="form-label">Cycle</label>
                                                         {{ form_widget(formedit[reservations.id].cycle) }}
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label for="validationServer03" class="form-label">Cycle</label>
-                                                        {{ form_widget(formedit[reservations.id].userid) }}
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer03" class="form-label">Date
+                                                            Fin</label>
+                                                        {{ form_widget(formedit[reservations.id].end_date) }}
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label for="validationServer03" class="form-label">Cycle</label>
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer03" class="form-label">Heure
+                                                            Fin</label>
+                                                        {{ form_widget(formedit[reservations.id].end_time) }}
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="validationServer03" class="form-label">Access
+                                                            ID</label>
                                                         {{ form_widget(formedit[reservations.id].accessid) }}
                                                     </div>
                                                 </div>
@@ -159,7 +166,7 @@
                                                     {{ form_end(formedit[reservations.id]) }}
                                                     <th>
                                                         <form method="post"
-                                                              action="{{ path('access_delete', {id: reservations.id}) }}"
+                                                              action="{{ path('reservation_delete', {id: reservations.id}) }}"
                                                               style="display: inline-block"
                                                               onsubmit="return confirm('Etes-vous sûr de supprimer {{ reservations.location }} ?')">
                                                             <input type="hidden" name="_method" value="DELETE">

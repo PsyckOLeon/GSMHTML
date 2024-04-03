@@ -30,11 +30,11 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $start_time = null;
+    #[ORM\Column]
+    private ?int $start_time = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $end_time = null;
+    #[ORM\Column]
+    private ?int $end_time = null;
 
     #[ORM\Column]
     private ?int $cycle = null;
@@ -87,24 +87,24 @@ class Reservation
         return $this;
     }
 
-    public function getStartTime(): ?\DateTimeInterface
+    public function getStartTime(): ?int
     {
         return $this->start_time;
     }
 
-    public function setStartTime(\DateTimeInterface $start_time): static
+    public function setStartTime(int $start_time): static
     {
         $this->start_time = $start_time;
 
         return $this;
     }
 
-    public function getEndTime(): ?\DateTimeInterface
+    public function getEndTime(): ?int
     {
         return $this->end_time;
     }
 
-    public function setEndTime(\DateTimeInterface $end_time): static
+    public function setEndTime(int $end_time): static
     {
         $this->end_time = $end_time;
 

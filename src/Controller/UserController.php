@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserControllerType;
+use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,7 +34,7 @@ class UserController extends AbstractController
                     ->add('save', SubmitType::class, array('label' => 'Ajouter un article')
                     )->getForm();*/
 
-        $form = $this->createForm(UserControllerType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
 
@@ -61,7 +61,7 @@ class UserController extends AbstractController
                 "Pas d'utilisateur avec cette ".$id
             );
         }
-        $form = $this->createForm(UserControllerType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

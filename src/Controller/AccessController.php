@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Access;
-use App\Form\AccessControllerType;
+use App\Form\AccessType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,15 +16,10 @@ class AccessController extends AbstractController
     #[Route('/access', name: 'app_access')]
     public function index(EntityManagerInterface $entityManager,Request $request): Response
     {
-        // Ajout
-        $addaccess = new Access();
-        /*        $form = $this->createFormBuilder($article)
-                    ->add('name', TextType::class)
-                    ->add('price', TextType::class)
-                    ->add('save', SubmitType::class, array('label' => 'Ajouter un article')
-                    )->getForm();*/
 
-        $form = $this->createForm(AccessControllerType::class, $addaccess);
+        $addaccess = new Access();
+
+        $form = $this->createForm(AccessType::class, $addaccess);
 
         $form->handleRequest($request);
 
@@ -36,12 +31,11 @@ class AccessController extends AbstractController
 
             return $this->redirectToRoute('app_access');
         }
-        // Fin Ajout
-        // Modification
+
         $access = $entityManager->getRepository(Access::class)->findAll();
         $formEdit = [];
         foreach ($access as $accesss) {
-            $formEdit[$accesss->getId()] = $this->createForm(AccessControllerType::class, $accesss)->createView();
+            $formEdit[$accesss->getId()] = $this->createForm(AccessType::class, $accesss)->createView();
         }
 
         return $this->render('access/index.html.twig', [
@@ -62,7 +56,7 @@ class AccessController extends AbstractController
                 "Pas d'utilisateur avec cette ".$id
             );
         }
-        $form = $this->createForm(AccessControllerType::class, $access);
+        $form = $this->createForm(AccessType::class, $access);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

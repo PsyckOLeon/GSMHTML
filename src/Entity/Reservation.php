@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\ApiFilter;
 use App\Controller\RequestController;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;

@@ -5,7 +5,6 @@ namespace App\Controller;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use App\Entity\Access;
-use App\Entity\Request;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,20 +38,14 @@ class RequestController extends AbstractController
 
         $reservationData = [];
         foreach ($reservations as $reservation) {
-            $access = $accessRepository->find($reservation->getAccessId());
-            if ($access) {
-                $designation = $access->getName();
-            } else {
-                // Gérer le cas où aucun enregistrement n'est trouvé
-                $designation = 'Unknown'; // Par exemple
-            }
+            $access = $accessRepository->findOneBy(['id' => $reservation->getAccessId()]);
             $reservationData[] = [
                 'startDate' => $reservation->getStartDate(),
                 'endDate' => $reservation->getEndDate(),
                 'startTime' => $reservation->getStartTime(),
                 'endTime' => $reservation->getEndTime(),
                 'cycle' => $reservation->getCycle(),
-                'designation' => $designation,
+                'designation' => $access['name'],
             ];
         }
 

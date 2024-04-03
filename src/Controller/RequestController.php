@@ -39,13 +39,19 @@ class RequestController extends AbstractController
         $reservationData = [];
         foreach ($reservations as $reservation) {
             $access = $accessRepository->findOneBy(['id' => $reservation->getAccessId()]);
+            if ($access) {
+                $designation = $access->getName();
+            } else {
+                // Gérer le cas où aucun enregistrement n'est trouvé
+                $designation = 'Unknown'; // Par exemple
+            }
             $reservationData[] = [
                 'startDate' => $reservation->getStartDate(),
                 'endDate' => $reservation->getEndDate(),
                 'startTime' => $reservation->getStartTime(),
                 'endTime' => $reservation->getEndTime(),
                 'cycle' => $reservation->getCycle(),
-                'designation' => $access['name'],
+                'designation' => $designation,
             ];
         }
 
@@ -57,6 +63,12 @@ class RequestController extends AbstractController
         ];
 
         return new JsonResponse($userData);
+    }
+
+    // Ajoutez la méthode __invoke ici
+    public function __invoke(string $telephone, EntityManagerInterface $entityManager): JsonResponse
+    {
+        return $this->getUserByTelephone($telephone, $entityManager);
     }
 }
 

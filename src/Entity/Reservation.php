@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Controller\RequestController;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
@@ -11,11 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource
 (
     operations: [
-        'get' => [
-            'method' => 'GET',
-            'path' => '/request/{telephone}',
-            'controller' => RequestController::class,
-            'openapi_context' => [
+        new Get(
+            uriTemplate: '/request/{telephone}',
+            controller: RequestController::class,
+            openapiContext: [
                 'summary' => 'Get user reservations by telephone',
                 'parameters' => [
                     [
@@ -27,9 +27,21 @@ use Doctrine\ORM\Mapping as ORM;
                             'type' => 'string',
                         ],
                     ],
+                    [
+                        'name' => 'id',
+                        'in' => 'path',
+                        'required' => false,
+                        'description' => 'Ignored',
+                        'schema' => [
+                            'type' => 'string',
+                            'default' => 'ignored',
+                        ],
+                    ],
                 ],
             ],
-        ],
+            output: false,
+            read: false,
+        ),
     ]
 )
 ]

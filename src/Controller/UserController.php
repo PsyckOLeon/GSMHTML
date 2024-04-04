@@ -14,51 +14,46 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,Request $request): Response
     {
-        $user = $entityManager->getRepository(User::class)->findAll();
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-            'current_menu' => 'user',
-            'user' => $user,
-        ]);
-    }
+        $adduser = new User();
 
-    #[Route('/user/add', name: 'user_add')]
-    public function add(EntityManagerInterface $entityManager,Request $request)
-    {
-        $user = new User();
-        /*        $form = $this->createFormBuilder($article)
-                    ->add('name', TextType::class)
-                    ->add('price', TextType::class)
-                    ->add('save', SubmitType::class, array('label' => 'Ajouter un article')
-                    )->getForm();*/
-
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $adduser);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $entityManager->persist($user);
+            $adduser = $form->getData();
+            $entityManager->persist($adduser);
             $entityManager->flush();
-            $this->addFlash('success', "L'Utilisateur <strong>{$user->getFirstname()}</strong> a bien été enregistré");
+            $this->addFlash('success', "L'utilisateur <strong>{$adduser->getname()}</strong> a bien été enregistré");
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_access');
         }
-        return $this->render('user/add.html.twig', [
+
+        $user = $entityManager->getRepository(User::class)->findAll();
+        $formEdit = [];
+        foreach ($user as $users) {
+            $formEdit[$users->getId()] = $this->createForm(UserType::class, $users)->createView();
+        }
+
+        return $this->render('user/index.html.twig', [
+            'controller_name' => 'UserController',
             'current_menu' => 'user',
-            'form' => $form->createView()]);
+            'user' => $user,
+            'form' => $form->createView(),
+            'formedit' => $formEdit,
+        ]);
     }
 
     #[Route('/user/edit/{id}', name: 'user_edit')]
-    public function update(EntityManagerInterface $entityManager, Request $request,int $id): Response
+    public function update(EntityManagerInterface $entityManager, Request $request, int $id): Response
     {
-        $user = $entityManager->getRepository(User::class)->find($id);
+        $user = $entityManager->getRepository(Access::class)->find($id);
 
         if (!$user) {
             throw $this->createNotFoundException(
-                "Pas d'utilisateur avec cette ".$id
+                "Pas d'access avec cette " . $id
             );
         }
         $form = $this->createForm(UserType::class, $user);
@@ -66,15 +61,13 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', "L'Utilisateur <strong>{$user->getFirstname()}</strong> a bien été modifié");
+            $this->addFlash('success', "L'User <strong>{$user->getName()}</strong> a bien été modifié");
             return $this->redirectToRoute('app_user');
         }
 
-        return $this->render('user/edit.html.twig', [
-            'current_menu' => 'user',
-            'form' => $form->createView()]);
+        return $this->redirectToRoute('app_user', [
+        ]);
     }
-
     #[Route('/user/delete/{id}', name: 'user_delete')]
     public function delete(EntityManagerInterface $entityManager, int $id): RedirectResponse
     {

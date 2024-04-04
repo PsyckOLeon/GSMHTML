@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
-    public function index(EntityManagerInterface $entityManager,Request $request): Response
+    public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
         $adduser = new User();
 
@@ -49,11 +49,11 @@ class UserController extends AbstractController
     #[Route('/user/edit/{id}', name: 'user_edit')]
     public function update(EntityManagerInterface $entityManager, Request $request, int $id): Response
     {
-        $user = $entityManager->getRepository(Access::class)->find($id);
+        $user = $entityManager->getRepository(User::class)->find($id);
 
         if (!$user) {
             throw $this->createNotFoundException(
-                "Pas d'access avec cette " . $id
+                "Pas d'utilisateur avec cette " . $id
             );
         }
         $form = $this->createForm(UserType::class, $user);
@@ -68,6 +68,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user', [
         ]);
     }
+
     #[Route('/user/delete/{id}', name: 'user_delete')]
     public function delete(EntityManagerInterface $entityManager, int $id): RedirectResponse
     {
@@ -75,7 +76,7 @@ class UserController extends AbstractController
 
         if (!$user) {
             throw $this->createNotFoundException(
-                "Pas d'utilisateur avec cette ".$id
+                "Pas d'utilisateur avec cette " . $id
             );
         }
 

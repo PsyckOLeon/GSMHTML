@@ -9,13 +9,16 @@
         <div class="collapse navbar-collapse" id="navbarsExample02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'reservation' %}active{% endif %}" href="{{ path('app_reservation') }}">Réservation</a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'reservation' %}active{% endif %}"
+                       href="{{ path('app_reservation') }}">Réservation</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'user' %}active{% endif %}" href="{{ path('app_user') }}">Utilisateur</a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'user' %}active{% endif %}"
+                       href="{{ path('app_user') }}">Utilisateur</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'access' %}active{% endif %}" href="{{ path('app_access') }}">Access</a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'access' %}active{% endif %}"
+                       href="{{ path('app_access') }}">Access</a>
                 </li>
             </ul>
             {#            Symbol #}

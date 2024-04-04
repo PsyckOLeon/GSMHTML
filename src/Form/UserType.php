@@ -15,8 +15,7 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('phone_number')
-            ->add('permission')
-        ;
+            ->add('permission');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

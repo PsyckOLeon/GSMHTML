@@ -1,6 +1,12 @@
 body {
     background-color: lightgray;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Le contenu prend autant d'espace que possible */
 }
 
 .btn-bd-primary {
@@ -12,4 +18,8 @@ body {
 .bi {
     vertical-align: -.125em;
     fill: currentColor;
+}
+
+.filler {
+    flex: 1; /* Remplit l'espace entre le contenu et le footer */
 }

@@ -34,8 +34,8 @@ class ReservationController extends AbstractController
 
         $reservation = $entityManager->getRepository(Reservation::class)->findAll();
         $formEdit = [];
-        foreach ($reservation as $accesss) {
-            $formEdit[$accesss->getId()] = $this->createForm(ReservationType::class, $accesss)->createView();
+        foreach ($reservation as $reservations) {
+            $formEdit[$reservations->getId()] = $this->createForm(ReservationType::class, $reservations)->createView();
         }
 
         return $this->render('reservation/index.html.twig', [

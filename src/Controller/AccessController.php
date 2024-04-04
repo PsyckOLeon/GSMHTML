@@ -62,7 +62,7 @@ class AccessController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', "L'Access <strong>{$access->getName()}</strong> a bien été modifié");
+            $this->addFlash('info', "L'Access <strong>{$access->getName()}</strong> a bien été modifié");
             return $this->redirectToRoute('app_access');
         }
 
@@ -83,7 +83,7 @@ class AccessController extends AbstractController
 
         $entityManager->remove($access);
         $entityManager->flush();
-        $this->addFlash('success', "L'Access <strong>{$access->getName()}</strong> a bien été supprimé");
+        $this->addFlash('warning', "L'Access <strong>{$access->getName()}</strong> a bien été supprimé");
 
         return $this->redirectToRoute('app_access', [
         ]);

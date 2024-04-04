@@ -62,7 +62,7 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', "La réservation <strong>{$reservation->getLocation()}</strong> a bien été modifié");
+            $this->addFlash('info', "La réservation <strong>{$reservation->getLocation()}</strong> a bien été modifié");
             return $this->redirectToRoute('app_reservation');
         }
 
@@ -83,7 +83,7 @@ class ReservationController extends AbstractController
 
         $entityManager->remove($reservation);
         $entityManager->flush();
-        $this->addFlash('success', "La réservation <strong>{$reservation->getLocation()}</strong> a bien été supprimé");
+        $this->addFlash('warning', "La réservation <strong>{$reservation->getLocation()}</strong> a bien été supprimé");
 
         return $this->redirectToRoute('app_reservation', [
         ]);

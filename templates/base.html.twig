@@ -20,6 +20,16 @@
 <header data-bs-theme="auto">
     {{ include('partials/header.html.twig') }}
 </header>
+{% for label, messages in app.flashes %}
+    <div class="container mt-2">
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message | raw }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
 <main data-bs-theme="auto">
     {% block body %}{% endblock %}
 </main>

@@ -26,9 +26,9 @@ class UserController extends AbstractController
             $adduser = $form->getData();
             $entityManager->persist($adduser);
             $entityManager->flush();
-            $this->addFlash('success', "L'utilisateur <strong>{$adduser->getname()}</strong> a bien été enregistré");
+            $this->addFlash('success', "L'utilisateur <strong>{$adduser->getFirstname()} {$adduser->getLastname()}</strong> a bien été enregistré");
 
-            return $this->redirectToRoute('app_access');
+            return $this->redirectToRoute('app_user');
         }
 
         $user = $entityManager->getRepository(User::class)->findAll();
@@ -61,7 +61,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('success', "L'User <strong>{$user->getName()}</strong> a bien été modifié");
+            $this->addFlash('info', "L'User <strong>{$user->getFirstname()} {$user->getLastname()}</strong> a bien été modifié");
             return $this->redirectToRoute('app_user');
         }
 
@@ -82,7 +82,7 @@ class UserController extends AbstractController
 
         $entityManager->remove($user);
         $entityManager->flush();
-        $this->addFlash('success', "L'Utilisateur <strong>{$user->getFirstname()} {$user->getLastname()} {$user->getPhoneNumber()}</strong> a bien été supprimé");
+        $this->addFlash('warning', "L'Utilisateur <strong>{$user->getFirstname()} {$user->getLastname()} {$user->getPhoneNumber()}</strong> a bien été supprimé");
 
         return $this->redirectToRoute('app_user', [
         ]);

@@ -1,5 +1,4 @@
 const Encore = require('@symfony/webpack-encore');
-const path = require('path');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');

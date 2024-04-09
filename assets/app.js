@@ -5,26 +5,16 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
-const $ = require('jquery');
-// this "modifies" the jquery module: adding behavior to it
-// the bootstrap module doesn't export/return anything
-require('bootstrap');
-
-// or you can include specific pieces
-require('bootstrap/js/dist/tooltip');
-require('bootstrap/js/dist/popover');
+import 'bootstrap';
+import 'bootstrap/js/dist/tooltip';
+import 'bootstrap/js/dist/popover';
+import $ from 'jquery';
 
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
 
 // Theme
-
-/*!
- * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
- * Copyright 2011-2024 The Bootstrap Authors
- * Licensed under the Creative Commons Attribution 3.0 Unported License.
- */
 
 (() => {
     'use strict'
@@ -100,7 +90,6 @@ $(document).ready(function () {
             })
     })
 })()
-
 
 // Fin Theme
 

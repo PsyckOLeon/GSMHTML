@@ -88,4 +88,18 @@ class AccessController extends AbstractController
         return $this->redirectToRoute('app_access', [
         ]);
     }
+    #[Route('/access/{id}', name: 'access_info')]
+    public function info(EntityManagerInterface $entityManager, Request $request, int $id): Response
+    {
+        $access = $entityManager->getRepository(Access::class)->find($id);
+        $reservations = $access->getAccessid();
+
+
+        return $this->render('access/info.html.twig', [
+            'controller_name' => 'AccessController',
+            'current_menu' => 'access',
+            'access' => $access,
+            'reservation' => $reservations,
+        ]);
+    }
 }

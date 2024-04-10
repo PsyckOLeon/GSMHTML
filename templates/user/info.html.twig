@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Access {{ access.name }}{% endblock %}
+{% block title %}Utilisateur {{ user.lastname }} {{ user.firstname }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>{{ access.name }} </h1>
+        <h1>{{ user.lastname }} {{ user.firstname }}</h1>
         <br>
         <table class="table table-striped table-bordered text-center">
             <thead class="thead-light">
@@ -47,7 +47,7 @@
                     {% set startDate = reservations.getStartDate()|date('Y/m/d') %}
                     {% set endDate = reservations.getEndDate()|date('Y/m/d') %}
                     <tr>
-                        <th scope="row">{{ reservations.userid.firstname }} {{ reservations.userid.lastname }}</th>
+                        <th scope="row">{{ reservations.accessid.name}}</th>
                         {% for hour in 0..23 %}
                             <td {% if reservations.starttime <= hour and reservations.endtime >= hour %} class="bg-success" {% endif %}></td>
                         {% endfor %}

@@ -89,7 +89,7 @@ class AccessController extends AbstractController
         ]);
     }
     #[Route('/access/{id}', name: 'access_info')]
-    public function info(EntityManagerInterface $entityManager, Request $request, int $id): Response
+    public function info(EntityManagerInterface $entityManager, int $id): Response
     {
         $access = $entityManager->getRepository(Access::class)->find($id);
         $reservations = $access->getAccessid();

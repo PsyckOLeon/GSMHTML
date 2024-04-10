@@ -87,4 +87,17 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user', [
         ]);
     }
+    #[Route('/user/{id}', name: 'user_info')]
+    public function info(EntityManagerInterface $entityManager, int $id): Response
+    {
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $reservations = $user->getUserid();
+
+        return $this->render('user/info.html.twig', [
+            'controller_name' => 'UserController',
+            'current_menu' => 'user',
+            'user' => $user,
+            'reservation' => $reservations,
+        ]);
+    }
 }

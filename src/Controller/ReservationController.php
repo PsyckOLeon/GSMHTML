@@ -88,4 +88,21 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('app_reservation', [
         ]);
     }
+
+    #[Route('/reservation/{id}', name: 'reservation_info')]
+    public function info(EntityManagerInterface $entityManager, int $id): Response
+    {
+        $reservation = $entityManager->getRepository(Reservation::class)->find($id);
+        $access = $reservation->getAccessid();
+        $user = $reservation->getUserid();
+
+
+        return $this->render('reservation/info.html.twig', [
+            'controller_name' => 'ReservationController',
+            'current_menu' => 'reservation',
+            'reservation' => $reservation,
+            'user' => $user,
+            'access' => $access,
+        ]);
+    }
 }

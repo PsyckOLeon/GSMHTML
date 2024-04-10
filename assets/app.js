@@ -5,10 +5,8 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
-import 'bootstrap';
-import 'bootstrap/js/dist/tooltip';
-import 'bootstrap/js/dist/popover';
-import $ from 'jquery';
+const $ = require('jquery');
+require('bootstrap');
 
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
@@ -97,3 +95,4 @@ $(document).ready(function () {
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import './styles/global.scss';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
